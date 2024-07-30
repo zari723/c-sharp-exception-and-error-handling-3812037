@@ -10,6 +10,9 @@ try {
     Oven.SetOvenTemp(600);
     Console.WriteLine($"Oven temp set to {Oven.GetOvenTemp()}");
 }
+catch(OvenTempException e){
+    Console.WriteLine($"Exception: {e.Message}");
+}
 finally {
     Console.WriteLine("Done");
 }
@@ -21,6 +24,9 @@ public class MyOven
     public void SetOvenTemp(int TemperatureF)
     {
         // TODO: Make sure that the argument is between 100 and 500
+        if(TemperatureF < 100 || TemperatureF > 500){
+            throw new OvenTempException(TemperatureF);
+        }
         OvenTemp = TemperatureF;
     }
 

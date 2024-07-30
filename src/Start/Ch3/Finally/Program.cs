@@ -16,6 +16,9 @@ catch (DivideByZeroException e) {
 catch (IndexOutOfRangeException e) {
     Console.WriteLine($"Index out of range!");
 }
+finally{
+    Console.WriteLine("This always runs.");
+}
 
 
 // A funtion that divides two integers

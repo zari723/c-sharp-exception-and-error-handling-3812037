@@ -4,6 +4,8 @@
 // Exercise file for C# Exception and Error Handling by Joe Marini
 // Basic exceptions
 
+//inner exception to follow the main exception (when one exception is hidden under the another one)
+
 try {
     int[] nums = {0,1,2,3,4,5,6,7,8,9};
 
@@ -19,8 +21,19 @@ int IntDivider(int a, int b) {
     try {
         return a / b;
     }
-    catch (DivideByZeroException e) {
-        LogException(e);
+    catch(DivideByZeroException e) {
+        try
+        {
+            LogException(e);
+        }
+        catch (FileNotFoundException fnf)
+        {
+            Console.WriteLine($"File Not Found: {fnf}");
+            if (fnf.InnerException != null)
+            {
+                Console.WriteLine($"InnerException: {fnf.InnerException}");
+            }
+        }
     }
     return 0;
 }
@@ -31,5 +44,6 @@ void LogException(Exception e) {
     }
     catch (FileNotFoundException fnf) {
         Console.WriteLine("Log file doesn't exist!");
+        throw new FileNotFoundException("file is missing", e); //not good without inner check outside
     }
 }

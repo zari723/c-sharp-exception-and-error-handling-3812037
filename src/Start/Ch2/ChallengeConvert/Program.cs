@@ -17,5 +17,40 @@ while (Continue) {
     }
 
     // Challenge: Convert the string to a number and perform the operation
+    try
+    {
+        a = int.Parse(str!);
+        b = int.Parse(str2!);
 
+        switch (op)
+        {
+            case "a":
+                result = await + b;
+                break;
+            case "s":
+                result = a - b;
+                break;
+            case "m":
+                result = a * b;
+                break;
+            case "d":
+                result = a / b;
+                break;
+            default:
+                throw new ArgumentException($"'{op}' is not a valid operation", "op");
+        }
+        Console.WriteLine($"Result is: {result}");
+    }
+    catch (FormatException e)
+    {
+        Console.WriteLine($"{e.Message}");
+    }
+    catch (DivideByZeroException e)
+    {
+        Console.WriteLine($"{e.Message}");
+    }
+    catch (ArgumentException e)
+    {
+        Console.WriteLine($"{e.Message}");
+    }
 }
